@@ -115,10 +115,10 @@ class Sensor(models.Model):
     sensor_id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=100)
     ip_address = models.CharField(max_length=100)
-    room_id = models.IntegerField()
+    room_id = models.IntegerField() 
     building_id = models.ForeignKey(Building, on_delete=models.CASCADE)
     status = models.CharField(max_length=20)
-
+    
 class Incident(models.Model):
     incident_id = models.AutoField(primary_key=True)
     description = models.TextField()
