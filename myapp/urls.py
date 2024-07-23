@@ -25,7 +25,7 @@
 
 # myapp.urls.py
 from django.urls import path
-from .views import RegisterView, LoginView, LocationListCreateView, LocationDetailView, TenantListCreateView, TenantDetailView, BuildingListCreateView, BuildingDetailView, SensorListCreateView, SensorDetailView, IncidentListCreateView, IncidentDetailView, NotificationListCreateView, NotificationDetailView
+from .views import RegisterView, LoginView, LocationListCreateView, LocationDetailView, TenantListCreateView, TenantDetailView, BuildingListCreateView, BuildingDetailView, SensorListCreateView, SensorDetailView, IncidentListCreateView, IncidentDetailView, NotificationListCreateView, NotificationDetailView, UserDataView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -44,4 +44,5 @@ urlpatterns = [
     path('incidents/<int:pk>/', IncidentDetailView.as_view(), name='incident-detail'),
     path('notifications/', NotificationListCreateView.as_view(), name='notification-list-create'),
     path('notifications/<int:pk>/', NotificationDetailView.as_view(), name='notification-detail'),
+    path('user-data/<int:user_id>/', UserDataView.as_view(), name='user-data'),
 ]
