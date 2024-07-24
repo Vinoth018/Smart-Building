@@ -92,19 +92,28 @@ class Location(models.Model):
         return f"{self.city}, {self.country} ({self.status})"
 
 class Tenant(models.Model):
+    STATUS_CHOICES = [
+        ('Active', 'Active'),
+        ('Inactive', 'Inactive'),
+    ]
     tenant_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
     admin_id = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
 class Building(models.Model):
+    STATUS_CHOICES = [
+        ('Active', 'Active'),
+        ('Inactive', 'Inactive'),
+    ]
     building_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=255)
     floors = models.IntegerField()
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
     tenant_id = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+    
     description = models.TextField()
     cover_image = models.ImageField(upload_to='cover_images/', null=True, blank=True)
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
@@ -120,9 +129,13 @@ class Sensor(models.Model):
     status = models.CharField(max_length=20)
     
 class Incident(models.Model):
+    STATUS_CHOICES = [
+        ('Active', 'Active'),
+        ('Inactive', 'Inactive'),
+    ]
     incident_id = models.AutoField(primary_key=True)
     description = models.TextField()
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
     assigned_to = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='assigned_incidents')
     due_date = models.DateField()
     resolved_date = models.DateField(null=True, blank=True)
